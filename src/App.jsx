@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+    <div className="bg-[#EAEAEC] ">
+      <a>- The Author -</a>
+      <a> The Books -</a>
+      <header>
+        <img
+          className="h-10 w-10"
+          src="/logo-kristin-baker.png"
+          alt="Vite logo"
+        />
+      </header>
+      <main>
+        <div>
+          <a>
+            <img
+              className="h-100 w-100"
+              src="/cobalt-landing-img.png"
+              alt="Vite logo"
+            />
+          </a>
+        </div>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          "Katerina gripped the railing of the airship, the wind whipping her
+          hair into a frenzy. Below, the world blurred into a dizzying canvas of
+          greens and browns. Fear gnawed at her stomach, but it was overshadowed
+          by a fierce determination. She wouldn't go back to her aunt, not ever.
+          No matter what dangers awaited her in the unknown, they couldn't be
+          worse than the life she was running away from. Taking a deep breath,
+          Kate forced a smile onto her unfamiliar face. It was time to face
+          whatever fate had in store for her."
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
