@@ -3,32 +3,27 @@ import session from "express-session";
 import morgan from "morgan";
 import ViteExpress from "vite-express";
 
-import appRouter from "./routes/index.js";
-
 const app = express();
-const PORT = "5000";
+const PORT = "5030";
 ViteExpress.config({ printViteDevServerHost: true });
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
-  session({
-    secret: "nobodyWillEverKnow",
-    saveUninitialized: true,
-    resave: false,
-  })
+  session({ secret: "ssshhhhh", saveUninitialized: true, resave: false })
 );
 
-app.use(appRouter);
-
 app.get("/TheAuthor", async (req, res) => {
+  console.log("req: ", req);
   const authorData = {
     name: "Kristin Baker",
     imageUrl: "/logo-kristin-baker.png",
     bio: "A brief bio about Kristin Baker...",
   };
-  res.json(authorData);
+
+  console.log("the author data: ", authorData);
+  return res.json(authorData);
 });
 
 ViteExpress.listen(app, PORT, () =>
