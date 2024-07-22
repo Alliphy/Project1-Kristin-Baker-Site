@@ -22,6 +22,15 @@ app.use(
 
 app.use(appRouter);
 
+app.get("/TheAuthor", async (req, res) => {
+  const authorData = {
+    name: "Kristin Baker",
+    imageUrl: "/logo-kristin-baker.png",
+    bio: "A brief bio about Kristin Baker...",
+  };
+  res.json(authorData);
+});
+
 ViteExpress.listen(app, PORT, () =>
   console.log(`Server is listening on: ${PORT}`)
 );
