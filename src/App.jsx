@@ -1,5 +1,3 @@
-import "./App.css";
-import styled from "styled-components";
 import { NavLink, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -24,7 +22,7 @@ function App() {
   console.log("authorData: ", authorData);
 
   return (
-    <div className="bg-[#EAEAEC] ">
+    <div className="bg-[#EAEAEC] w-full h-full">
       <nav>
         {/* TODO: Plugin Author Data from server */}
         {/* state={{ author: authorData }} */}
@@ -32,7 +30,7 @@ function App() {
         <NavLink to="/books">- The Books -</NavLink>
       </nav>
       <header>
-        <Logo
+        <img
           className="h-10 w-10"
           src="/logo-kristin-baker.png"
           alt="Vite logo"
@@ -49,9 +47,4 @@ function App() {
     </div>
   );
 }
-
-const Logo = styled.img`
-  height: 50px;
-`;
-
 export default App;

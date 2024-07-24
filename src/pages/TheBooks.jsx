@@ -1,15 +1,25 @@
-import styled from "styled-components";
-
 const TheBooks = () => {
   return (
-    <Container>
+    <div className="w-full">
       <i>The Books</i>
-    </Container>
+      <section>
+        <div>
+          <img alt="cover art for Cobalt" />
+          <p>Cobalt</p>
+          <p>Brief Description</p>
+        </div>
+        <div>
+          <img alt="Coming Soon" />
+          <p>SeaWood</p>
+        </div>
+        <div>
+          <img alt="Coming Soon" />
+          <p>Cobalt 2</p>
+          <p>Brief Description</p>
+        </div>
+      </section>
+    </div>
   );
 };
-
-const Container = styled.div`
-  width: 100%;
-`;
 
 export { TheBooks };
