@@ -1,5 +1,6 @@
 // import axios from "axios";
 import "./index.css";
+import "../output.css";
 import ReactDOM from "react-dom/client";
 import {
   Route,

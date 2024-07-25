@@ -22,27 +22,42 @@ function App() {
   console.log("authorData: ", authorData);
 
   return (
-    <div className="bg-[#EAEAEC] w-full h-full">
-      <nav>
-        {/* TODO: Plugin Author Data from server */}
-        {/* state={{ author: authorData }} */}
-        <NavLink to="/author">- The Author -</NavLink>
-        <NavLink to="/books">- The Books -</NavLink>
-      </nav>
-      <header>
-        <img
-          className="h-10 w-10"
-          src="/logo-kristin-baker.png"
-          alt="Vite logo"
-        />
+    <div className="w-full h-full bg-[#EAEAEC] ">
+      <header className="flex items-center p-3">
+        <nav>
+          <NavLink to="/">
+            <img
+              className="h-10 w-10"
+              src="/logo-kristin-baker.png"
+              alt="Vite logo"
+            />
+          </NavLink>
+        </nav>
+        <nav className="w-full flex justify-around">
+          {/* TODO: Plugin Author Data from server */}
+          {/* state={{ author: authorData }} */}
+          <NavLink to="/author">- The Author -</NavLink>
+          <NavLink to="/books">- The Books -</NavLink>
+        </nav>
       </header>
       <main>
         <Outlet />
       </main>
-      <footer>
+      <footer className="mt-5">
         <div>
           <p>Find Kristin Baker elsewhere:</p>
         </div>
+        <nav className="flex w-2/4 justify-between">
+          <NavLink>
+            <img alt="instagram icon"></img>
+          </NavLink>
+          <NavLink>
+            <img alt="tiktok icon?"></img>
+          </NavLink>
+          <NavLink>
+            <img alt="facebook icon"></img>
+          </NavLink>
+        </nav>
       </footer>
     </div>
   );

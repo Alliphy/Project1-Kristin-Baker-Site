@@ -9,10 +9,12 @@ const TheBooks = () => {
           <p>Brief Description</p>
         </div>
         <div>
+          <p>Coming Soon...</p>
           <img alt="Coming Soon" />
           <p>SeaWood</p>
         </div>
         <div>
+          <p>Coming Soon...</p>
           <img alt="Coming Soon" />
           <p>Cobalt 2</p>
           <p>Brief Description</p>

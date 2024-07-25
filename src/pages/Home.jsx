@@ -1,12 +1,12 @@
 const Home = () => {
   return (
-    <section className="w-full h-full">
-      <div className="w-2/4 h-2/4">
+    <section className="flex flex-col items-center w-full h-full">
+      <div>
         <a>
           <img src="/cobalt-landing-img.png" alt="Vite logo" />
         </a>
       </div>
-      <p>{quote}</p>
+      <p className="w-2/4 mt-32 text-center">{quote}</p>
     </section>
   );
 };
