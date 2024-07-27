@@ -27,7 +27,7 @@ function App() {
         <nav className="bg-gradient-to-t-from[#E8D7B0]">
           <NavLink to="/">
             <img
-              className="h-32 w-42 shadow-grey-500/50"
+              className="h-32 w-42 drop-shadow-grey-500/50"
               src="/homeButtonGears.png"
               alt="Vite logo"
             />

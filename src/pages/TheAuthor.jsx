@@ -6,14 +6,20 @@ export default function TheAuthor() {
   // console.log("author data:", author); // Add a log to check data
 
   return (
-    <div>
-      <div>
-        <i>The Author Component</i>
-        <h2>Kristin Baker</h2>
-        <p>{quote}</p>
+    <div className="p-5">
+      <div className="flex pl-5 pt-20">
+        <img
+          src="/davina-tennant.jpg"
+          alt="portrait of Kristin Baker"
+          className="object-cover w-2/4 rounded-full shadow-2xl"
+        />
+        <div className="w-2/4 pl-5 flex flex-col justify-center pl-8  pr-8">
+          <h2>Kristin Baker</h2>
+          <p>{quote}</p>
+        </div>
       </div>
-      <div>
-        <p>This will be for posts</p>
+      <div className="pt-32">
+        <p>Ahoy! There be Bloggin'</p>
         <p>Posts</p>
         <p>Posts</p>
       </div>

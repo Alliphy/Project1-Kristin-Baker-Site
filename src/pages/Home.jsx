@@ -5,7 +5,7 @@ const Home = () => {
         <h1></h1>
       </section>
       <div className="flex flex-col items-center">
-        <p className="w-2/4 mt-32 text-center">{quote}</p>
+        <p className="w-2/4 pt-32 text-center">{quote}</p>
       </div>
     </div>
   );
