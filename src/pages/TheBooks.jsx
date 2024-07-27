@@ -1,8 +1,7 @@
 const TheBooks = () => {
   return (
     <div className="w-full">
-      <i>The Books</i>
-      <section>
+      <section className="flex justify-evenly">
         <div>
           <img alt="cover art for Cobalt" />
           <p>Cobalt</p>
@@ -12,6 +11,7 @@ const TheBooks = () => {
           <p>Coming Soon...</p>
           <img alt="Coming Soon" />
           <p>SeaWood</p>
+          <p>Brief Description</p>
         </div>
         <div>
           <p>Coming Soon...</p>

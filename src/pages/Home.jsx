@@ -1,13 +1,13 @@
 const Home = () => {
   return (
-    <section className="flex flex-col items-center w-full h-full">
-      <div>
-        <a>
-          <img src="/cobalt-landing-img.png" alt="Vite logo" />
-        </a>
+    <div>
+      <section className="w-full h-screen bg-[url('/cobalt-landing-img.png')] bg-center bg-cover bg-no-repeat drop-shadow-2xl outline outline-gray-600">
+        <h1></h1>
+      </section>
+      <div className="flex flex-col items-center">
+        <p className="w-2/4 mt-32 text-center">{quote}</p>
       </div>
-      <p className="w-2/4 mt-32 text-center">{quote}</p>
-    </section>
+    </div>
   );
 };
 const quote = `"Katerina gripped the railing of the airship, the wind whipping her hair

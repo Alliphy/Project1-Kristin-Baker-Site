@@ -22,13 +22,13 @@ function App() {
   console.log("authorData: ", authorData);
 
   return (
-    <div className="w-full h-full bg-[#EAEAEC] ">
-      <header className="flex items-center p-3">
-        <nav>
+    <div className="w-full h-full bg-[#F1E7D0]">
+      <header className="flex flex-col items-center bg-gradient-to-b from-[#E8D7B0] bg-opacity-25 p-5">
+        <nav className="bg-gradient-to-t-from[#E8D7B0]">
           <NavLink to="/">
             <img
-              className="h-10 w-10"
-              src="/logo-kristin-baker.png"
+              className="h-32 w-42 shadow-grey-500/50"
+              src="/homeButtonGears.png"
               alt="Vite logo"
             />
           </NavLink>
@@ -43,19 +43,16 @@ function App() {
       <main>
         <Outlet />
       </main>
-      <footer className="mt-5">
-        <div>
+      <footer className="mt-10 bg-gradient-to-t from-[#E8D7B0]">
+        <div className="pt-5 pl-5">
           <p>Find Kristin Baker elsewhere:</p>
         </div>
-        <nav className="flex w-2/4 justify-between">
-          <NavLink>
-            <img alt="instagram icon"></img>
+        <nav className="flex w-2/4 p-5">
+          <NavLink className="mr-5">
+            <img src="/instagram-icon.png" alt="instagram icon"></img>
           </NavLink>
           <NavLink>
-            <img alt="tiktok icon?"></img>
-          </NavLink>
-          <NavLink>
-            <img alt="facebook icon"></img>
+            <img src="/facebook-icon.png" alt="facebook icon"></img>
           </NavLink>
         </nav>
       </footer>
