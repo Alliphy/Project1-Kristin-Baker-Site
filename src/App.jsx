@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./App.css";
+import "./index.css";
 
 function App() {
   const [authorData, setAuthorData] = useState(null);
@@ -43,11 +45,11 @@ function App() {
       <main>
         <Outlet />
       </main>
-      <footer className="mt-10 bg-gradient-to-t from-[#E8D7B0]">
+      <footer className=" bg-gradient-to-t from-[#E8D7B0] pb-20 pt-10">
         <div className="pt-5 pl-5">
           <p>Find Kristin Baker elsewhere:</p>
         </div>
-        <nav className="flex w-2/4 p-5">
+        <nav className="flex w-2/4 p-5 pb-20">
           <NavLink className="mr-5">
             <img src="/instagram-icon.png" alt="instagram icon"></img>
           </NavLink>

@@ -20,8 +20,16 @@ export default function TheAuthor() {
       </div>
       <div className="pt-32">
         <p>Ahoy! There be Bloggin'</p>
-        <p>Posts</p>
-        <p>Posts</p>
+        <section>
+          <div>
+            <p>Date</p>
+            <p>Posts</p>
+          </div>
+          <div>
+            <p>Date</p>
+            <p>Posts</p>
+          </div>
+        </section>
       </div>
     </div>
   );

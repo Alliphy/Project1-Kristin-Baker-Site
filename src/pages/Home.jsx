@@ -1,8 +1,16 @@
 const Home = () => {
   return (
     <div>
-      <section className="w-full h-screen bg-[url('/cobalt-landing-img.png')] bg-center bg-cover bg-no-repeat drop-shadow-2xl outline outline-gray-600">
-        <h1></h1>
+      <section className="w-full h-screen flex justify-center items-start bg-[url('/reduced-cobalt-landing-img.jpg')] bg-center bg-cover bg-no-repeat drop-shadow-2xl outline outline-gray-600">
+        <button
+          className="text-[#F6EFDF] text-6xl drop-shadow-md"
+          style={{
+            padding: "3rem",
+            textShadow: "5px 5px 8px #5d575757",
+          }}
+        >
+          Get lost in the pages of Cobalt
+        </button>
       </section>
       <div className="flex flex-col items-center">
         <p className="w-2/4 pt-32 text-center">{quote}</p>
