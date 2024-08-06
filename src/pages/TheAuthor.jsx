@@ -1,9 +1,31 @@
 // import { useLoaderData } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+// import { Post } from "../models";
 
 export default function TheAuthor() {
   // const { author } = useLoaderData();
 
   // console.log("author data:", author); // Add a log to check data
+
+  const [authorData, setAuthorData] = useState(null);
+  // const { posts } = useLoaderData();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("/api/posts");
+        console.log("useEffect res: ", res);
+        setAuthorData(res.data);
+      } catch (error) {
+        console.error("Error fetching author data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log("authorData: ", authorData);
 
   return (
     <div className="p-5">
@@ -22,13 +44,10 @@ export default function TheAuthor() {
         <p>Ahoy! There be Bloggin'</p>
         <section>
           <div>
-            <p>Date</p>
-            <p>Posts</p>
+            <p>{Date}</p>
+            <p></p>
           </div>
-          <div>
-            <p>Date</p>
-            <p>Posts</p>
-          </div>
+          <div></div>
         </section>
       </div>
     </div>

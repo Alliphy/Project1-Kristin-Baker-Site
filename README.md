@@ -1,8 +1,23 @@
-# React + Vite
+# Kristin Baker Author Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a static website for author Kristin Baker. It features an index page, an author page with a hidden admin section for blog post management, and a books page to showcase the author's works.
 
-Currently, two official plugins are available:
+## Functionality
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- App.jsx: Displays general information about the author and links to other pages.
+- TheAuthor.jsx: Features author biography, and a blog section.
+- TheBooks.jsx: Lists the author's books with titles, covers, and descriptions. Potentially purchase links included.
+- Admin.jsx: Handles user authentication for the admin section.
+- AdminPosts.jsx: Allows the author to create, edit, and delete blog posts.
+
+### Technologies
+
+- HTML for page structure.
+- CSS for styling.
+- JSX for interactive elements
+
+#### Seed the Database
+
+- npm i
+- node src/seed.js
+- nodemon app.js

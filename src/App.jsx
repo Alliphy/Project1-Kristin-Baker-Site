@@ -1,28 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import "./App.css";
 import "./index.css";
 
 function App() {
-  const [authorData, setAuthorData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("/TheAuthor");
-        console.log("useEffect res: ", res);
-        setAuthorData(res.data);
-      } catch (error) {
-        console.error("Error fetching author data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  console.log("authorData: ", authorData);
-
   return (
     <div className="w-full h-full bg-[#F1E7D0]">
       <header className="flex flex-col items-center bg-gradient-to-b from-[#E8D7B0] bg-opacity-25 p-5">
@@ -35,7 +15,7 @@ function App() {
             />
           </NavLink>
         </nav>
-        <nav className="w-full flex justify-around">
+        <nav className="w-full flex justify-around p-10">
           {/* TODO: Plugin Author Data from server */}
           {/* state={{ author: authorData }} */}
           <NavLink to="/author">- The Author -</NavLink>
@@ -45,7 +25,7 @@ function App() {
       <main>
         <Outlet />
       </main>
-      <footer className=" bg-gradient-to-t from-[#E8D7B0] pb-20 pt-10">
+      <footer className=" bg-gradient-to-t from-[#E8D7B0] pb-20 pt-20">
         <div className="pt-5 pl-5">
           <p>Find Kristin Baker elsewhere:</p>
         </div>
