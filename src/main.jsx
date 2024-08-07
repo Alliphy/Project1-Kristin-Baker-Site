@@ -17,12 +17,12 @@ import LoginPage from "./pages/LoginPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />} errorElement={<ErrorPage />}>
+    <Route path="/app" element={<App />} errorElement={<ErrorPage />}>
       {/* Author Page */}
-      <Route path="/" element={<Home />} />
-      <Route path="/author" element={<TheAuthor />} />
-      <Route path="/books" element={<TheBooks />} />
-      <Route path="/api/auth" element={<LoginPage />} />
+      <Route path="/app" element={<Home />} />
+      <Route path="/app/author" element={<TheAuthor />} />
+      <Route path="/app/books" element={<TheBooks />} />
+      {/* <Route path="/api/auth" element={<LoginPage />} /> */}
     </Route>
   )
 );

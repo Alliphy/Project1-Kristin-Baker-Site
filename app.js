@@ -56,22 +56,45 @@ app.post("/api/auth", async (req, res) => {
 //   res.json(rating);
 // });
 
+app.delete("/api/posts/:postId", async (req, res) => {
+  const postId = req.params.postId;
+
+  try {
+    // Find the post to be deleted based on postId
+    const postToDelete = await Post.findByPk(postId);
+
+    if (!postToDelete) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    // Delete the post from the database
+    await postToDelete.destroy();
+
+    res.status(204).send(); // No content response
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 app.get("/api/posts", async (req, res) => {
   const posts = await Post.findAll();
   console.log("Hit");
   return res.json({ posts });
 });
 
-viteExpress.listen(app, PORT, () => {
-  console.log(`Listening on ${PORT}`);
-});
+app.post("/api/user/posts", async (req, res) => {
+  // const { userId } = req.session;
+  const { postData } = req.body;
 
-app.post("/api/admin/posts", async (req, res) => {
-  const { userId } = req.session;
-  const { title, body } = req.body;
+  const { title, body } = postData;
 
-  const user = await User.findByPk(userId);
-  const post = await user.createPost({ title: title, body: body });
+  // const user = await User.findByPk(userId);
+  const post = await Post.create({ title: title, body: body });
 
   res.json(post);
+});
+
+viteExpress.listen(app, PORT, () => {
+  console.log(`Listening on ${PORT}`);
 });
