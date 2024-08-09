@@ -12,11 +12,34 @@ viteExpress.config({ printViteDevServerHost: true });
 app.use(express.json());
 app.use(cors());
 
+app.use((req, res, next) => {
+  if (req.path === "/api/user/posts" && req.method === "POST") {
+    const auth = req.headers.authorization;
+    if (auth === "FhTftSMTLWDH800000T") {
+      next();
+    } else {
+      res.status(403).send("Not Authorized");
+    }
+  }
+});
+
 app.get("/", (req, res) => {
   res.send("OK");
 });
 
-// Custom route middleware function that checks if the user is logged in.
+// app.post("/api/auth", async (req, res) => {
+//   const { email, password } = req.body;
+//   const user = await User.findOne({ where: { email: email } });
+
+//   if (user && user.password === password) {
+//     req.session.userId = user.userId;
+//     //Store userId in session
+//     res.json({ success: true });
+//   } else {
+//     res.json({ success: false });
+//   }
+// });
+
 // function loginRequired(req, res, next) {
 //   if (!req.session.userId) {
 //     res.status(401).json({ error: "Unauthorized" });
@@ -24,18 +47,6 @@ app.get("/", (req, res) => {
 //     next();
 //   }
 // }
-
-app.post("/api/auth", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ where: { email: email } });
-
-  if (user && user.password === password) {
-    req.session.userId = user.userId;
-    res.json({ success: true });
-  } else {
-    res.json({ success: false });
-  }
-});
 
 // Note the `loginRequired` argument passed to the routes below!
 
@@ -45,16 +56,6 @@ app.post("/api/auth", async (req, res) => {
 // });
 
 //loginRequired, add login required after implementing login
-
-// app.post("/api/ratings", loginRequired, async (req, res) => {
-//   const { userId } = req.session;
-//   const { movieId, score } = req.body;
-
-//   const user = await User.findByPk(userId);
-//   const rating = await user.createRating({ movieId: movieId, score: score });
-
-//   res.json(rating);
-// });
 
 app.delete("/api/posts/:postId", async (req, res) => {
   const postId = req.params.postId;
@@ -90,6 +91,10 @@ app.post("/api/user/posts", async (req, res) => {
   const { title, body } = postData;
 
   // const user = await User.findByPk(userId);
+
+  // if (!user) {
+  //   return res.status(401).json({ error: "Unauthorized" }); //User not found in session
+  // }
   const post = await Post.create({ title: title, body: body });
 
   res.json(post);
