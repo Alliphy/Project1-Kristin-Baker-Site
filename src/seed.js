@@ -8,8 +8,8 @@ console.log("Seeding database...");
 
 const userData = [
   {
-    firstName: "Kristin",
-    lastName: "Baker",
+    username: "Kristin",
+    password: "password",
   },
 ];
 
@@ -23,10 +23,10 @@ const postData = [
 
 const usersInDB = await Promise.all(
   userData.map((user) => {
-    const { firstName, lastName } = user;
+    const { username, password } = user;
     const newUser = User.create({
-      firstName,
-      lastName,
+      username,
+      password,
     });
 
     return newUser;

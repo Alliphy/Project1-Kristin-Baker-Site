@@ -21,3 +21,7 @@ This project is a static website for author Kristin Baker. It features an index 
 - npm i
 - node src/seed.js
 - nodemon app.js
+
+##### Images Used
+
+- Cat within the logo created by Iconduck on Figma

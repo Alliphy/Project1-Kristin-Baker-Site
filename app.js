@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import viteExpress from "vite-express";
+import session from "express-session";
 
 import { Post, User } from "./src/models.js";
 
@@ -11,6 +12,23 @@ viteExpress.config({ printViteDevServerHost: true });
 
 app.use(express.json());
 app.use(cors());
+app.use(
+  session({
+    secret: "ssshhhhh",
+    saveUninitialized: true,
+    resave: false,
+    cookie: { maxAge: 10 * 1000 * 60 },
+  })
+);
+
+// Custom route middleware function that checks if the user is logged in.
+function loginRequired(req, res, next) {
+  if (!req.session.userId) {
+    res.status(401).json({ error: "Unauthorized" });
+  } else {
+    next();
+  }
+}
 
 app.use((req, res, next) => {
   if (req.path === "/api/user/posts" && req.method === "POST") {
@@ -27,37 +45,29 @@ app.get("/", (req, res) => {
   res.send("OK");
 });
 
-// app.post("/api/auth", async (req, res) => {
-//   const { email, password } = req.body;
-//   const user = await User.findOne({ where: { email: email } });
+app.post("/api/auth", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ where: { email: email } });
 
-//   if (user && user.password === password) {
-//     req.session.userId = user.userId;
-//     //Store userId in session
-//     res.json({ success: true });
-//   } else {
-//     res.json({ success: false });
-//   }
-// });
-
-// function loginRequired(req, res, next) {
-//   if (!req.session.userId) {
-//     res.status(401).json({ error: "Unauthorized" });
-//   } else {
-//     next();
-//   }
-// }
+  if (user && user.password === password) {
+    req.session.userId = user.userId;
+    //Store userId in session
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
+  }
+});
 
 // Note the `loginRequired` argument passed to the routes below!
 
-// app.post("/api/logout", loginRequired, (req, res) => {
-//   req.session.destroy();
-//   res.json({ success: true });
-// });
+app.post("/api/logout", loginRequired, (req, res) => {
+  req.session.destroy();
+  res.json({ success: true });
+});
 
 //loginRequired, add login required after implementing login
 
-app.delete("/api/posts/:postId", async (req, res) => {
+app.delete("/api/posts/:postId", loginRequired, async (req, res) => {
   const postId = req.params.postId;
 
   try {
@@ -78,23 +88,23 @@ app.delete("/api/posts/:postId", async (req, res) => {
   }
 });
 
-app.get("/api/posts", async (req, res) => {
+app.get("/api/posts", loginRequired, async (req, res) => {
   const posts = await Post.findAll();
   console.log("Hit");
   return res.json({ posts });
 });
 
-app.post("/api/user/posts", async (req, res) => {
-  // const { userId } = req.session;
+app.post("/api/user/posts", loginRequired, async (req, res) => {
+  const { userId } = req.session;
   const { postData } = req.body;
 
   const { title, body } = postData;
 
-  // const user = await User.findByPk(userId);
+  const user = await User.findByPk(userId);
 
-  // if (!user) {
-  //   return res.status(401).json({ error: "Unauthorized" }); //User not found in session
-  // }
+  if (!user) {
+    return res.status(401).json({ error: "Unauthorized" }); //User not found in session
+  }
   const post = await Post.create({ title: title, body: body });
 
   res.json(post);

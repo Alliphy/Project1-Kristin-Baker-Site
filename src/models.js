@@ -15,10 +15,10 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    firstName: {
+    email: {
       type: DataTypes.STRING,
     },
-    lastName: {
+    password: {
       type: DataTypes.STRING,
     },
   },
