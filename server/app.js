@@ -3,7 +3,7 @@ import cors from "cors";
 import viteExpress from "vite-express";
 import session from "express-session";
 
-import { Post, User } from "./src/models.js";
+import { Post, User } from "./models.js";
 
 const app = express();
 const PORT = 4202;
@@ -30,37 +30,30 @@ function loginRequired(req, res, next) {
   }
 }
 
-app.use((req, res, next) => {
-  if (req.path === "/api/user/posts" && req.method === "POST") {
-    const auth = req.headers.authorization;
-    if (auth === "FhTftSMTLWDH800000T") {
-      next();
-    } else {
-      res.status(403).send("Not Authorized");
-    }
-  }
-});
-
 app.get("/", (req, res) => {
   res.send("OK");
 });
 
 app.post("/api/auth", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ where: { email: email } });
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email: email } });
 
-  if (user && user.password === password) {
-    req.session.userId = user.userId;
-    //Store userId in session
-    res.json({ success: true });
-  } else {
-    res.json({ success: false });
+    if (user && user.password === password) {
+      req.session.userId = user.userId;
+      //Store userId in session
+      res.json({ success: true });
+    } else {
+      res.json({ success: false });
+    }
+  } catch (e) {
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
 // Note the `loginRequired` argument passed to the routes below!
 
-app.post("/api/logout", loginRequired, (req, res) => {
+app.post("/api/logout", (req, res) => {
   req.session.destroy();
   res.json({ success: true });
 });
@@ -88,7 +81,7 @@ app.delete("/api/posts/:postId", loginRequired, async (req, res) => {
   }
 });
 
-app.get("/api/posts", loginRequired, async (req, res) => {
+app.get("/api/posts", async (req, res) => {
   const posts = await Post.findAll();
   console.log("Hit");
   return res.json({ posts });

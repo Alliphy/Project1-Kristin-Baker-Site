@@ -22,8 +22,8 @@ const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/author" element={<TheAuthor />} />
       <Route path="/books" element={<TheBooks />} />
-      <Route path="/api/auth" element={<Admin />} />
-      {/* <Route path="/api/auth" element={<Admin />} /> */}
+      <Route path="/auth" element={<Admin />} />
+      <Route path="/author/user/posts" element={<TheAuthor />} />
     </Route>
   )
 );

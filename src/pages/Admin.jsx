@@ -8,11 +8,12 @@ export default function Admin() {
 
   const handleLogin = async (event, formData) => {
     event.preventDefault();
-
     const res = await axios.post("/api/auth", formData);
 
     if (res.data.success) {
-      navigate("/home");
+      localStorage.setItem("userId", res.data.userId);
+
+      navigate("/author/user/posts");
     }
   };
 

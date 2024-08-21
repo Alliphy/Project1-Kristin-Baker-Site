@@ -20,12 +20,14 @@ export default function TheAuthor() {
         body: newPost.body,
       };
 
+      const userId = localStorage.getItem("userId");
+
       const response = await fetch("http://localhost:4202/api/user/posts", {
         method: "POST", // Use POST for sending data
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: "FhTftSMTLWDH800000T",
+          ...(userId && { Authorization: `Bearer ${userId}` }), // Include authorization if userId exists
         },
         body: JSON.stringify({ postData: payload }),
       });
@@ -72,17 +74,35 @@ export default function TheAuthor() {
   };
 
   const fetchMyPosts = useCallback(() => {
+    // fetch("http://localhost:4202/api/posts", {
+    //   method: "GET", // Use GET for receiving data
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setIsLoggedIn(!!data.userId);
+    // const posts = data.posts;
+    // console.log("posts: ", posts);
+    // if (Array.isArray(posts)) {
+    //   setPostData(posts);
+    //     }
+    //   })
+    const userId = localStorage.getItem("userId");
+
     fetch("http://localhost:4202/api/posts", {
       method: "GET", // Use GET for receiving data
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        ...(userId && { Authorization: `Bearer ${userId}` }), // Include authorization if userId exists
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        //create a statement within response to see if logged in. canCreatePosts && render createPosts only
-        setIsLoggedIn(!!data.userId);
+        setIsLoggedIn(!!data.userId); // Update isLoggedIn based on response
         const posts = data.posts;
         console.log("posts: ", posts);
         if (Array.isArray(posts)) {
@@ -104,8 +124,6 @@ export default function TheAuthor() {
   useEffect(() => {
     fetchMyPosts();
   }, [fetchMyPosts]);
-
-  // console.log("authorData: ", authorData)
 
   return (
     <div className="p-5">

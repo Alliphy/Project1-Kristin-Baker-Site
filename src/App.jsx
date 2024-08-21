@@ -5,7 +5,7 @@ import "./index.css";
 function App() {
   return (
     <div className="w-full h-full bg-[#F1E7D0]">
-      <header className="flex flex-col items-center bg-gradient-to-b from-[#E8D7B0] bg-opacity-25 p-5">
+      <header className="flex flex-col items-center bg-[#E8D7B0] bg-gradient-to-b from-[#F1E7D0] drop-shadow-grey-500/50 p-5">
         <nav className="bg-gradient-to-t-from[#E8D7B0]">
           <NavLink to="/">
             <img
@@ -22,47 +22,54 @@ function App() {
           <NavLink to="/books">- The Books -</NavLink>
         </nav>
       </header>
-      <main>
+
+      <main className="bg-gradient-to-b from-[#E8D7B0] bg-opacity-25 pb-20">
         <Outlet />
       </main>
-      <footer className=" bg-gradient-to-t from-[#E8D7B0] pb-20 pt-20">
-        <div className="flex justify-between pt-5 pl-5">
+
+      <footer className="bg-[#E8D7B0] bg-gradient-to-t from-[#F1E7D0] bg-gradient-to-b from-[#F1E7D0] drop-shadow-grey-500/50 pt-20">
+        <div className="flex justify-between w-screen items-start pl-5 pr-5">
           <div>
-            <p>Find Kristin Baker elsewhere:</p>
-            <nav className="flex w-2/4 pt-5">
+            <p className="text-sm">Find Kristin Baker elsewhere:</p>
+            <nav className="flex w-2/4">
               <NavLink
-                className="p-5"
+                className="w-2/4 pb-5 pt-5 pr-5"
                 to="https://www.instagram.com/piratekristin/"
               >
                 <img src="/instagram-icon.png" alt="instagram icon"></img>
               </NavLink>
               <NavLink
-                className="p-5"
+                className="w-2/4 pb-5 pt-5 pl-5"
                 to="https://www.facebook.com/search/top?q=fantasy%20and%20steampunk%20ya%20author%20kristin%20baker"
               >
                 <img src="/facebook-icon.png" alt="facebook icon"></img>
               </NavLink>
             </nav>
           </div>
-          <section className="flex flex-col justify-evenly">
+          <section className="flex flex-col justify-evenly text-xs">
             <p className="">Credit for Icons:</p>
-            <div className="pr-5 pt-5">
+            <div>
               <p>Cat in logo by Iconduck on figma</p>
             </div>
           </section>
         </div>
 
-        <div className="flex justify-between items-center w-screen h-3/4">
+        <div className="flex items-end justify-between w-screen h-3/4">
           {" "}
           <img
-            src="/leftGears.png"
-            alt="image of gears"
-            className="w-1/20 h-1/5"
+            src="/smallMushImage.png"
+            alt="small image of mushrooms"
+            className="w-1/20 h-20 pt-12 pl-5"
           />
           <img
-            src="/rightGears.png"
-            alt="image of gears"
-            className="w-1/20 h-1/5"
+            src="/groupOfMushies.png"
+            alt="image of three mushrooms"
+            className=" h-40 pt-12"
+          />
+          <img
+            src="/smallMushImage.png"
+            alt="small image of mushrooms"
+            className="w-1/20 h-20 pt-12 pr-5"
           />
         </div>
       </footer>
