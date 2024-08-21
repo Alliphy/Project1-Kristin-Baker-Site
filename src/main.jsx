@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import "./index.css";
 import "../output.css";
 import ReactDOM from "react-dom/client";
@@ -23,7 +23,6 @@ const router = createBrowserRouter(
       <Route path="/author" element={<TheAuthor />} />
       <Route path="/books" element={<TheBooks />} />
       <Route path="/auth" element={<Admin />} />
-      <Route path="/author/user/posts" element={<TheAuthor />} />
     </Route>
   )
 );

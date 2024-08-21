@@ -20,14 +20,12 @@ export default function TheAuthor() {
         body: newPost.body,
       };
 
-      const userId = localStorage.getItem("userId");
-
       const response = await fetch("http://localhost:4202/api/user/posts", {
         method: "POST", // Use POST for sending data
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          ...(userId && { Authorization: `Bearer ${userId}` }), // Include authorization if userId exists
+          Authorization: "FhTftSMTLWDH800000T",
         },
         body: JSON.stringify({ postData: payload }),
       });
@@ -74,35 +72,16 @@ export default function TheAuthor() {
   };
 
   const fetchMyPosts = useCallback(() => {
-    // fetch("http://localhost:4202/api/posts", {
-    //   method: "GET", // Use GET for receiving data
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setIsLoggedIn(!!data.userId);
-    // const posts = data.posts;
-    // console.log("posts: ", posts);
-    // if (Array.isArray(posts)) {
-    //   setPostData(posts);
-    //     }
-    //   })
-    const userId = localStorage.getItem("userId");
-
     fetch("http://localhost:4202/api/posts", {
       method: "GET", // Use GET for receiving data
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        ...(userId && { Authorization: `Bearer ${userId}` }), // Include authorization if userId exists
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        setIsLoggedIn(!!data.userId); // Update isLoggedIn based on response
+        setIsLoggedIn(!!data.userId);
         const posts = data.posts;
         console.log("posts: ", posts);
         if (Array.isArray(posts)) {
