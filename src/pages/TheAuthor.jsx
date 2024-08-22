@@ -25,7 +25,6 @@ export default function TheAuthor() {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: "FhTftSMTLWDH800000T",
         },
         body: JSON.stringify({ postData: payload }),
       });
@@ -159,6 +158,7 @@ export default function TheAuthor() {
               {isLoggedIn && (
                 <button onClick={() => deletePost(post.postId)}>Delete</button>
               )}
+              {console.log(isLoggedIn)}
             </div>
           ))}
         </section>

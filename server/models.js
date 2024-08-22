@@ -68,5 +68,25 @@ Post.init(
   }
 );
 
+export class Session extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+Session.init(
+  {
+    userId: {
+      type: DataTypes.INTEGER,
+    },
+    cookieId: {
+      type: DataTypes.INTEGER,
+    },
+  },
+  {
+    modelName: "session",
+    sequelize: db,
+  }
+);
+
 User.hasMany(Post, { foreignKey: "userId" });
 Post.belongsTo(User, { foreignKey: "userId" });

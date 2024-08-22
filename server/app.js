@@ -22,8 +22,11 @@ app.use(
 );
 
 // Custom route middleware function that checks if the user is logged in.
-function loginRequired(req, res, next) {
-  if (!req.session.userId) {
+async function loginRequired(req, res, next) {
+  const session = await session.findOne({
+    where: { cookieId: req.session.cookie.id },
+  });
+  if (!session) {
     res.status(401).json({ error: "Unauthorized" });
   } else {
     next();
@@ -40,7 +43,7 @@ app.post("/api/auth", async (req, res) => {
     const user = await User.findOne({ where: { email: email } });
 
     if (user && user.password === password) {
-      req.session.userId = user.userId;
+      await session.create({ user: user.userId });
       //Store userId in session
       res.json({ success: true });
     } else {
@@ -83,8 +86,12 @@ app.delete("/api/posts/:postId", loginRequired, async (req, res) => {
 
 app.get("/api/posts", async (req, res) => {
   const posts = await Post.findAll();
+  const session = await session.findOne({
+    where: { cookieId: req.session.cookie.id },
+  });
+  const userId = session.userId;
   console.log("Hit");
-  return res.json({ posts });
+  return res.json({ posts, userId });
 });
 
 app.post("/api/user/posts", loginRequired, async (req, res) => {
