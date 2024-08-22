@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import viteExpress from "vite-express";
 import session from "express-session";
+import db from "./db.js";
 
 import { Post, User } from "./models.js";
 
@@ -14,19 +15,19 @@ app.use(express.json());
 app.use(cors());
 app.use(
   session({
-    secret: "ssshhhhh",
+    secret: "IGotAJarOfDirtGuessWhatsInsideIt",
+    cookie: { maxAge: 10 * 1000 * 60 },
     saveUninitialized: true,
     resave: false,
-    cookie: { maxAge: 10 * 1000 * 60 },
+    memoryStore: db,
   })
 );
 
+db.sync();
+
 // Custom route middleware function that checks if the user is logged in.
 async function loginRequired(req, res, next) {
-  const session = await session.findOne({
-    where: { cookieId: req.session.cookie.id },
-  });
-  if (!session) {
+  if (!req.session.userId) {
     res.status(401).json({ error: "Unauthorized" });
   } else {
     next();
@@ -38,17 +39,30 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/auth", async (req, res) => {
+  console.log(req.body);
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ where: { email: email } });
+    const userData = await User.findOne({
+      where: { email: req.body.email, password: req.body.password },
+    });
+    console.log(userData);
+    // code for verifying whether the user details are valid...
+    // if everything checks out, we can then save our session by referencing
+    // details about that user from the database
+    req.session.save(() => {
+      req.session.logged_in = true;
+      req.session.user = {
+        id: userData.id,
+        email: userData.email,
+        password: userData.password,
+      };
 
-    if (user && user.password === password) {
-      await session.create({ user: user.userId });
-      //Store userId in session
-      res.json({ success: true });
-    } else {
-      res.json({ success: false });
-    }
+      return res.json({
+        user: userData,
+        message: "You are now logged in!",
+        success: true,
+        session: req.session,
+      });
+    });
   } catch (e) {
     res.status(500).json({ error: "Server Error" });
   }
@@ -86,12 +100,8 @@ app.delete("/api/posts/:postId", loginRequired, async (req, res) => {
 
 app.get("/api/posts", async (req, res) => {
   const posts = await Post.findAll();
-  const session = await session.findOne({
-    where: { cookieId: req.session.cookie.id },
-  });
-  const userId = session.userId;
   console.log("Hit");
-  return res.json({ posts, userId });
+  return res.json({ posts });
 });
 
 app.post("/api/user/posts", loginRequired, async (req, res) => {

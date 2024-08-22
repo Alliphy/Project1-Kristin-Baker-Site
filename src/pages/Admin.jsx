@@ -10,6 +10,7 @@ export default function Admin() {
     event.preventDefault();
 
     const res = await axios.post("/api/auth", formData);
+    console.log(res);
 
     if (res.data.success) {
       navigate("/author");
