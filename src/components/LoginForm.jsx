@@ -1,4 +1,5 @@
 import { useState } from "react";
+import LogoutButton from "./LogoutButton";
 
 export default function LoginForm({ onLogin }) {
   const [emailValue, setEmailValue] = useState("");

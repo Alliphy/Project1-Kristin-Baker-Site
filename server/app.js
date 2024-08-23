@@ -16,7 +16,7 @@ app.use(cors());
 app.use(
   session({
     secret: "IGotAJarOfDirtGuessWhatsInsideIt",
-    // cookie: { maxAge: 10 * 1000 * 60 },
+    cookie: { maxAge: 10 * 1000 * 60 },
     saveUninitialized: true,
     resave: false,
   })
@@ -42,7 +42,7 @@ app.post("/api/auth", async (req, res) => {
     const userData = await User.findOne({
       where: { email: req.body.email, password: req.body.password },
     });
-    // console.log(userData);
+    console.log(userData);
     // code for verifying whether the user details are valid...
     // if everything checks out, we can then save our session by referencing
     // details about that user from the database
@@ -63,6 +63,7 @@ app.post("/api/auth", async (req, res) => {
       session: req.session,
     });
   } catch (e) {
+    console.log("hit catch");
     res.status(500).json({ error: "Server Error" });
   }
 });

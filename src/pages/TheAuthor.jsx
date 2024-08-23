@@ -1,12 +1,21 @@
 // import { useLoaderData } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 // import { Post } from "../models";
+import LogoutButton from "../components/LogoutButton";
 
 export default function TheAuthor() {
   // const [authorData, setAuthorData] = useState(null);
   const [postData, setPostData] = useState([]);
   const [newPost, setNewPost] = useState({ title: "", body: "" });
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    const localIsLoggedIn = localStorage.getItem("isLoggedIn");
+    console.log(localIsLoggedIn);
+    if (localIsLoggedIn === "true") {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
   const handleSavePost = async (e) => {
     e.preventDefault();
@@ -47,16 +56,9 @@ export default function TheAuthor() {
 
   const deletePost = async (postId) => {
     try {
-      const response = await fetch(
-        `http://localhost:4202/api/posts/${postId}`,
-        {
-          method: "DELETE", // Use DELETE for removing data
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
-      );
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: "DELETE", // Use DELETE for removing data
+      });
 
       if (!response.ok) {
         throw new Error(`Error deleting post: ${response.statusText}`);
@@ -71,7 +73,7 @@ export default function TheAuthor() {
   };
 
   const fetchMyPosts = useCallback(() => {
-    fetch("http://localhost:4202/api/posts", {
+    fetch("/api/posts", {
       method: "GET", // Use GET for receiving data
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +82,6 @@ export default function TheAuthor() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setIsLoggedIn(!data.userId);
         const posts = data.posts;
         console.log("posts: ", posts);
         if (Array.isArray(posts)) {
