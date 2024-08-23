@@ -14,7 +14,6 @@ import TheAuthor from "./pages/TheAuthor.jsx";
 import { TheBooks } from "./pages/TheBooks.jsx";
 import { Home } from "./pages/Home.jsx";
 import Admin from "./pages/Admin.jsx";
-// import Admin from "./pages/Admin.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

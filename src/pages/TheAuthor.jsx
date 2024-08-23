@@ -20,13 +20,13 @@ export default function TheAuthor() {
         body: newPost.body,
       };
 
-      const response = await fetch("http://localhost:4202/api/user/posts", {
+      const response = await fetch("/api/user/posts", {
         method: "POST", // Use POST for sending data
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ postData: payload }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -80,7 +80,7 @@ export default function TheAuthor() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setIsLoggedIn(!!data.userId);
+        setIsLoggedIn(!data.userId);
         const posts = data.posts;
         console.log("posts: ", posts);
         if (Array.isArray(posts)) {

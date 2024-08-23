@@ -16,8 +16,6 @@ function App() {
           </NavLink>
         </nav>
         <nav className="w-full flex justify-around p-10">
-          {/* TODO: Plugin Author Data from server */}
-          {/* state={{ author: authorData }} */}
           <NavLink to="/author">- The Author -</NavLink>
           <NavLink to="/books">- The Books -</NavLink>
         </nav>
