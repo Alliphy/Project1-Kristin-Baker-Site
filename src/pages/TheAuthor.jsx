@@ -1,15 +1,16 @@
-// import { useLoaderData } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
-// import { Post } from "../models";
-import LogoutButton from "../components/LogoutButton";
 
 export default function TheAuthor() {
-  // const [authorData, setAuthorData] = useState(null);
+  // State to hold the list of posts fetched from the API
   const [postData, setPostData] = useState([]);
+
+  // State to hold the new post data before saving
   const [newPost, setNewPost] = useState({ title: "", body: "" });
+
+  // State to track the logged in status based on localStorage
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     const localIsLoggedIn = localStorage.getItem("isLoggedIn");
-    console.log(localIsLoggedIn);
+    // console.log(localIsLoggedIn); // for debugging purposes
     if (localIsLoggedIn === "true") {
       return true;
     } else {
@@ -17,18 +18,23 @@ export default function TheAuthor() {
     }
   });
 
+  // Function to save a new post - only accessible when logged in
+
   const handleSavePost = async (e) => {
     e.preventDefault();
+    // Check if both title and body have content before proceeding
     if (newPost.body.length === 0 || newPost.title.length === 0) {
       return;
     }
 
     try {
+      // Prepare the payload (our data to send) for the post request
       const payload = {
         title: newPost.title,
         body: newPost.body,
       };
 
+      // Send a POST request to the API endpoint to save the new post
       const response = await fetch("/api/user/posts", {
         method: "POST", // Use POST for sending data
         headers: {
@@ -38,15 +44,20 @@ export default function TheAuthor() {
         body: JSON.stringify(payload),
       });
 
+      // Handle errors from the API response
       if (!response.ok) {
         throw new Error(`Error saving post: ${response.statusText}`);
       }
 
+      // Parsing the response data using json
       const data = await response.json();
 
-      console.log("post data after create: ", data);
+      // console log for our post data after successfully created
+      // console.log("post data after create: ", data);
 
+      // Perform additional actions after successful post creation
       onPostCreated(data);
+      // Reset the new post data to an empty object
       setPostData([]);
     } catch (error) {
       console.error("Error saving post:", error);
@@ -54,24 +65,28 @@ export default function TheAuthor() {
     }
   };
 
+  // Function to delete a post by its ID
   const deletePost = async (postId) => {
     try {
+      // Send a DELETE request to the API endpoint to delete the post
       const response = await fetch(`/api/posts/${postId}`, {
         method: "DELETE", // Use DELETE for removing data
       });
-
+      // Handle errors from the API response
       if (!response.ok) {
         throw new Error(`Error deleting post: ${response.statusText}`);
       }
 
       console.log("Post deleted successfully!");
-      fetchMyPosts(); // Update the UI with the new list of posts
+      // Update the UI with the new list of posts after deletion
+      fetchMyPosts();
     } catch (error) {
       console.error("Error deleting post:", error);
       alert("There was an error deleting the post. Please try again later.");
     }
   };
 
+  // Function to fetch all user's posts from the API (uses useCallback function)
   const fetchMyPosts = useCallback(() => {
     fetch("/api/posts", {
       method: "GET", // Use GET for receiving data
@@ -80,10 +95,13 @@ export default function TheAuthor() {
         Accept: "application/json",
       },
     })
-      .then((response) => response.json())
+      //once our promise is fulfilled we will then take our response to access the api call to gather all our post data within our array
+      .then((response) => response.json()) // Parse the response as JSON
       .then((data) => {
-        const posts = data.posts;
+        const posts = data.posts; // accessing "posts" property from data
         console.log("posts: ", posts);
+
+        // Check if the data is an array of posts before updating state
         if (Array.isArray(posts)) {
           setPostData(posts);
         }
@@ -94,15 +112,20 @@ export default function TheAuthor() {
       });
   }, []);
 
+  // Function to handle post creation callback to update browser
   const onPostCreated = (data) => {
     console.log("post created");
     console.log("here is the data: ", data);
-    fetchMyPosts();
+    fetchMyPosts(); // Re-fetch posts after a new one
   };
 
   useEffect(() => {
     fetchMyPosts();
   }, [fetchMyPosts]);
+
+  // This useEffect hook ensures that `fetchMyPosts` is called once when the component mounts and whenever the `fetchMyPosts` dependency changes.
+  // Since `fetchMyPosts` is a useCallback dependency this will only re-render if its implementation changes.
+  // This helps prevent unnecessary re-renders ensuring that posts are fetched correctly after actions such as creating or deleting a post. WOO!!! love a use effect
 
   return (
     <div className="p-5">
@@ -116,7 +139,7 @@ export default function TheAuthor() {
           <p>{quote}</p>
         </div>
       </div>
-      <div className="pt-32">
+      <div className="flex flex-col p-5 pt-32">
         {isLoggedIn ? (
           <section>
             {/* Input form for creating posts */}
@@ -149,13 +172,17 @@ export default function TheAuthor() {
         ) : (
           <p>Ahoy! There be Bloggin'</p>
         )}
-        <section>
+        <section className="flex flex-col">
           {/* Display all posts */}
           {postData.length === 0 && <div>No Posts Yet</div>}
           {postData.map((post) => (
             <div key={post.postId}>
-              <p>{post.title}</p>
-              <p>{post.body}</p>
+              <p className="p-5 border-b-2 divide-y-4 divide-amber-950">
+                {post.title}
+              </p>
+              <p className="p-5 border-b-2 divide-y-4 divide-amber-950">
+                {post.body}
+              </p>
               {isLoggedIn && (
                 <button onClick={() => deletePost(post.postId)}>Delete</button>
               )}
