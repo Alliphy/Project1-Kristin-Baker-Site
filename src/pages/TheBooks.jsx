@@ -37,7 +37,8 @@ const TheBooks = () => {
             boy from town, warns her to run before it&apos;s too late. Should
             River try to find out what happened to Windy and the others, or
             return to Seawood in the hopes that someone from her village is
-            still alive? What else does Taren know that he's not telling her?
+            still alive? What else does Taren know that he&apos;s not telling
+            her?
           </div>
         </section>
 
