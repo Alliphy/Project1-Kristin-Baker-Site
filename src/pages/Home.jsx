@@ -1,8 +1,11 @@
+import { NavLink } from "react-router-dom";
+
 const Home = () => {
   return (
     <div>
       <section className="w-screen h-screen flex justify-center items-start bg-[url('/reduced-cobalt-landing-img.jpg')] bg-center bg-cover bg-no-repeat drop-shadow-2xl outline outline-gray-600 cobaltLandingImgHomejsx">
-        <button
+        <NavLink
+          to="https://www.amazon.com/stores/Kristin-Baker/author/B081CFBLLL?isDramIntegrated=true&shoppingPortalEnabled=true"
           className="text-[#F6EFDF] text-6xl drop-shadow-md buttonToPayment"
           style={{
             padding: "3rem",
@@ -10,7 +13,7 @@ const Home = () => {
           }}
         >
           Get lost in the pages of Cobalt
-        </button>
+        </NavLink>
       </section>
       <div className="flex flex-col items-center divQuoteContainerHomeJsx">
         <p className="pt-32 text-center quotePTagHomejsx">{quote}</p>

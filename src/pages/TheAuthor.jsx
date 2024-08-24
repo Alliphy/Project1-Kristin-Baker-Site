@@ -134,16 +134,16 @@ export default function TheAuthor() {
           alt="portrait of Kristin Baker"
           className="bg-[url('/kristin-baker-image.jpg')] bg-left bg-cover bg-no-repeat w-2/4 rounded-full shadow-2xl kristinBakerImgAuthorjsx"
         ></div>
-        <div className="flex flex-col h-auto pl-5  text-xl place-content-center content divTextBioContainerAuthorjsx">
+        <div className="flex flex-col h-auto pb-20 text-xl place-content-center content divTextBioContainerAuthorjsx">
           <h2>Kristin Baker</h2>
           <p>{quote}</p>
         </div>
       </div>
-      <div className="flex flex-col p-5 pt-32">
+      <div className="flex flex-col p-5 pt-20">
         {isLoggedIn ? (
           <section>
             {/* Input form for creating posts */}
-            <form>
+            <form className="ml-5">
               <input
                 className="ml-5"
                 placeholder="Post Title"
@@ -166,7 +166,11 @@ export default function TheAuthor() {
                   }))
                 }
               />
-              <button className="ml-5" type="submit" onClick={handleSavePost}>
+              <button
+                className="ml-5 p-1"
+                type="submit"
+                onClick={handleSavePost}
+              >
                 Create New Post
               </button>
             </form>
@@ -174,16 +178,16 @@ export default function TheAuthor() {
         ) : (
           <p>Ahoy! There be Bloggin'</p>
         )}
-        <section className="flex flex-col">
+        <section className="flex flex-col sectionPostDataConAuthorjsx">
           {/* Display all posts */}
           {postData.length === 0 && <div>No Posts Yet</div>}
           {postData.map((post) => (
             <div key={post.postId}>
-              <p className="p-5">{post.title}</p>
-              <p className="p-5">{post.body}</p>
+              <p className="p-5 postTitleAuthorjsx text-2xl">{post.title}</p>
+              <p className="p-5 text-xl">{post.body}</p>
               {isLoggedIn && (
                 <button
-                  className="ml-5"
+                  className="ml-3 mt-2 mb-5 p-1"
                   onClick={() => deletePost(post.postId)}
                 >
                   Delete
@@ -199,9 +203,7 @@ export default function TheAuthor() {
 }
 
 const quote = `
-Kristin Baker is a lifelong wordsmith whose passion for storytelling ignited at a tender age. With a pen or laptop as her constant companion, she has spent countless hours crafting worlds and characters that dance across the pages of her imagination. Her debut novel, Cobalt, marks a significant milestone in her literary journey, bringing her vivid storytelling to life for readers everywhere.
-
-When not lost in the realms of fiction, Kristin revels in the role of a devoted mother to her six children, finding joy in their laughter and inspiration in their endless energy. A self-proclaimed goofy lady, she infuses her life with humor and lightheartedness, leaving a trail of smiles wherever she goes. Nature holds a special allure for Kristin, as she finds solace and adventure in hiking through the great outdoors. Whether it’s immersing herself in the tranquility of a body of water or embarking on unexpected encounters with snakes or crabs, her spirit for exploration knows no bounds.`;
+A landlocked pirate with a crew of useless cats, Kristin Baker currently lives in Idaho but dreams of the Oregon Coast. She loves hiking in mushroom-infested woods, experimenting with kitchen witch recipes, and pestering her six adult kids.`;
 
 // ----- I MADE BIG CHANGES SO THIS IS MY PREVIOUS CODE FOR REFERENCE -------- //
 
