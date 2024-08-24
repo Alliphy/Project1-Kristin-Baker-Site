@@ -1,9 +1,9 @@
 const Home = () => {
   return (
     <div>
-      <section className="w-full h-screen flex justify-center items-start bg-[url('/reduced-cobalt-landing-img.jpg')] bg-center bg-cover bg-no-repeat drop-shadow-2xl outline outline-gray-600">
+      <section className="w-screen h-screen flex justify-center items-start bg-[url('/reduced-cobalt-landing-img.jpg')] bg-center bg-cover bg-no-repeat drop-shadow-2xl outline outline-gray-600 cobaltLandingImgHomejsx">
         <button
-          className="text-[#F6EFDF] text-6xl drop-shadow-md"
+          className="text-[#F6EFDF] text-6xl drop-shadow-md buttonToPayment"
           style={{
             padding: "3rem",
             textShadow: "5px 5px 8px #5d575757",
@@ -12,8 +12,8 @@ const Home = () => {
           Get lost in the pages of Cobalt
         </button>
       </section>
-      <div className="flex flex-col items-center">
-        <p className="w-2/4 pt-32 text-center">{quote}</p>
+      <div className="flex flex-col items-center divQuoteContainerHomeJsx">
+        <p className="pt-32 text-center quotePTagHomejsx">{quote}</p>
       </div>
     </div>
   );

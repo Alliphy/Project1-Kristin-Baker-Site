@@ -129,12 +129,12 @@ export default function TheAuthor() {
 
   return (
     <div className="p-5">
-      <div className="flex">
+      <div className="flex divAuthorBioAuthorjsx">
         <div
           alt="portrait of Kristin Baker"
-          className="bg-[url('/kristin-baker-image.jpg')] bg-left bg-cover bg-no-repeat w-2/4 rounded-full shadow-2xl"
+          className="bg-[url('/kristin-baker-image.jpg')] bg-left bg-cover bg-no-repeat w-2/4 rounded-full shadow-2xl kristinBakerImgAuthorjsx"
         ></div>
-        <div className="flex flex-col w-2/4 h-screen pl-5 pl-8 pr-8 text-xl place-content-center">
+        <div className="flex flex-col h-auto pl-5  text-xl place-content-center content divTextBioContainerAuthorjsx">
           <h2>Kristin Baker</h2>
           <p>{quote}</p>
         </div>
@@ -145,6 +145,7 @@ export default function TheAuthor() {
             {/* Input form for creating posts */}
             <form>
               <input
+                className="ml-5"
                 placeholder="Post Title"
                 value={newPost.title}
                 onChange={(e) =>
@@ -155,6 +156,7 @@ export default function TheAuthor() {
                 }
               />
               <input
+                className="ml-5"
                 placeholder="Post Body"
                 value={newPost.body}
                 onChange={(e) =>
@@ -164,7 +166,7 @@ export default function TheAuthor() {
                   }))
                 }
               />
-              <button type="submit" onClick={handleSavePost}>
+              <button className="ml-5" type="submit" onClick={handleSavePost}>
                 Create New Post
               </button>
             </form>
@@ -177,14 +179,15 @@ export default function TheAuthor() {
           {postData.length === 0 && <div>No Posts Yet</div>}
           {postData.map((post) => (
             <div key={post.postId}>
-              <p className="p-5 border-b-2 divide-y-4 divide-amber-950">
-                {post.title}
-              </p>
-              <p className="p-5 border-b-2 divide-y-4 divide-amber-950">
-                {post.body}
-              </p>
+              <p className="p-5">{post.title}</p>
+              <p className="p-5">{post.body}</p>
               {isLoggedIn && (
-                <button onClick={() => deletePost(post.postId)}>Delete</button>
+                <button
+                  className="ml-5"
+                  onClick={() => deletePost(post.postId)}
+                >
+                  Delete
+                </button>
               )}
               {console.log(isLoggedIn)}
             </div>
