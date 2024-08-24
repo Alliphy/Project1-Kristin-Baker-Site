@@ -14,7 +14,7 @@ const TheBooks = () => {
             consider her cursed-ever since a childhood accident involving the
             mysterious and deadly substance Cobalt, she has woken up each
             morning with a new face. Now almost fourteen and fed up with her
-            aunt's abuse, Kate sneaks onto an airship bound for the distant
+            aunt&apos;s abuse, Kate sneaks onto an airship bound for the distant
             seaport.
           </div>
         </section>
