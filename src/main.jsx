@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import "./index.css";
 import "../output.css";
 import ReactDOM from "react-dom/client";
@@ -14,7 +14,6 @@ import TheAuthor from "./pages/TheAuthor.jsx";
 import { TheBooks } from "./pages/TheBooks.jsx";
 import { Home } from "./pages/Home.jsx";
 import Admin from "./pages/Admin.jsx";
-// import Admin from "./pages/Admin.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,8 +21,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/author" element={<TheAuthor />} />
       <Route path="/books" element={<TheBooks />} />
-      <Route path="/api/auth" element={<Admin />} />
-      {/* <Route path="/api/auth" element={<Admin />} /> */}
+      <Route path="/auth" element={<Admin />} />
     </Route>
   )
 );

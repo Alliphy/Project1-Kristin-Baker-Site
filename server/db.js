@@ -20,6 +20,6 @@ async function connectToDB(dbURI) {
 
   return sequelize;
 }
-const db = await connectToDB("postgres://evarue@localhost:5433/evarue");
+const db = await connectToDB("postgres:///evarue");
 
 export default db;

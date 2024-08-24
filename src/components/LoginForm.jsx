@@ -1,4 +1,5 @@
 import { useState } from "react";
+import LogoutButton from "./LogoutButton";
 
 export default function LoginForm({ onLogin }) {
   const [emailValue, setEmailValue] = useState("");
@@ -18,6 +19,7 @@ export default function LoginForm({ onLogin }) {
         name="email"
         id="email"
         type="text"
+        autoComplete="email"
         required
         onChange={(e) => setEmailValue(e.target.value)}
       />
@@ -26,6 +28,7 @@ export default function LoginForm({ onLogin }) {
         name="password"
         id="password"
         type="password"
+        autoComplete="password"
         required
         onChange={(e) => setPasswordValue(e.target.value)}
       />
